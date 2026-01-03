@@ -27,7 +27,7 @@ O sistema utiliza a biblioteca **MediaPipe** para processar a malha facial e ext
 
 ## 🛠️ Tech Stack
 
-* [Python](https://www.python.org/)
+* [Python 3.11](https://www.python.org/)
 * [OpenCV](https://opencv.org/)
 * [MediaPipe](https://mediapipe.dev/)
 * [Pygame](https://www.pygame.org/) (Gestão de áudio em tempo real)
@@ -35,6 +35,9 @@ O sistema utiliza a biblioteca **MediaPipe** para processar a malha facial e ext
 ---
 
 ## ▶️ Guia de Instalação e Uso
+
+> [!CAUTION]
+> **Requisito Obrigatório:** Este projeto foi desenvolvido e testado exclusivamente no **Python 3.11**. Versões superiores ou inferiores podem apresentar instabilidades nas dependências do MediaPipe.
 
 <details>
   <summary><strong>Clique para ver o passo a passo (Dev Setup)</strong></summary>
@@ -69,7 +72,7 @@ pip install -r requirements.txt
 ### 4. Executar
 ```bash
 
-python main.py
+python face_mesh.py
 ```
 
 </details>
