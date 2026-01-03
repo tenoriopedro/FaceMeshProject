@@ -2,6 +2,7 @@ import cv2
 import mediapipe as mp
 import time
 import math
+import pygame
 
 
 class FaceMeshDetector():
@@ -134,13 +135,23 @@ def main():
     # Selecionar webcam
     cap = cv2.VideoCapture(0)
 
+    # Inicia Pygame (mixer de som)
+    pygame.mixer.init()
+
+    try:
+        pygame.mixer.music.load("alarm.mp3")
+
+    except pygame.error:
+        print("ERRO CRÍTICO: Arquivo não encontrado.")
+        return
+
     # Configuração
     cap.set(3, 1000)
     cap.set(4, 1000)
 
     # Configurações de sono
-    EAR_THRESHOLD = 0.20   # Abaixo desse valor, o olho está fechado
-    MAX_TIME = 1.5         # Segundos permitidos de olho fechado
+    EAR_THRESHOLD = 0.20   # Abaixo desse valor, o olhos estão fechados
+    MAX_TIME = 1.5         # Segundos permitidos de olhos fechados
 
     # Variáveis de Controle
     start_time = None
@@ -162,7 +173,7 @@ def main():
         # Tirar efeito espelho
         img = cv2.flip(img, 1)
 
-        img, faces = detector.find_face_mesh(img, draw=False)
+        img, faces = detector.find_face_mesh(img, draw=True)
 
         if len(faces) > 0:
             face = faces[0]
@@ -198,7 +209,6 @@ def main():
 
                 # Trigger
                 if current_time >= MAX_TIME:
-                    alarm_status = True
 
                     cv2.putText(
                         img,
@@ -209,11 +219,23 @@ def main():
                         cor,
                         4
                     )
-                    print("DORMIU", left_ear)
+
+                    if not alarm_status:
+                        # -1 significa loop infinito
+                        pygame.mixer.music.play(-1)
+                        alarm_status = True
+
+                    # DEBUG
+                    # print("DORMIU", left_ear)
 
             else:
+                # Olho aberto
                 start_time = None
-                alarm_status = False
+
+                # Se o alarme estiver tocando, PARA imediatamente
+                if alarm_status:
+                    pygame.mixer.music.stop()
+                    alarm_status = False
 
             # Mostra valor EAR na tela
             cv2.putText(
@@ -234,6 +256,7 @@ def main():
 
     cap.release()
     cv2.destroyAllWindows()
+    pygame.mixer.quit()  # Fecha o mixer corretamente ao sair
     print("FIM DO PROGRAMA")
 
 
