@@ -76,3 +76,26 @@ python face_mesh.py
 ```
 
 </details>
+
+
+## 🔮 Roadmap e Melhorias Futuras
+
+Este projeto é um MVP (*Minimum Viable Product*) funcional. O plano de desenvolvimento futuro visa transformar este protótipo num produto robusto para uso em cenário real de condução.
+
+- [ ] **Calibração Automática de Sensibilidade:**
+    - Implementar uma fase inicial de 5 segundos para medir o EAR "normal" do utilizador e ajustar o limiar (Threshold) dinamicamente, evitando falsos positivos em pessoas com olhos naturalmente mais fechados.
+
+- [ ] **Deteção de Bocejos (Yawn Detection):**
+    - Integrar o cálculo do *Mouth Aspect Ratio (MAR)* para identificar bocejos repetitivos como um sinal precoce de fadiga, antes mesmo do fecho ocular.
+
+- [ ] **Análise de Postura da Cabeça (Head Pose):**
+    - Utilizar a geometria 3D do MediaPipe para detetar o "cabecear" (queda brusca da cabeça para a frente), cobrindo situações onde o condutor adormece sem fechar totalmente os olhos.
+
+- [ ] **Modo Noturno (Infravermelhos):**
+    - Adaptação do algoritmo para processar imagens de câmaras IR (Infravermelhas), permitindo o funcionamento em ambientes de escuridão total (habitáculo do carro à noite).
+
+- [ ] **Registo de Dados (Data Logging):**
+    - Criação de um sistema de logs que exporta um relatório `.csv` com os horários e duração dos eventos de sonolência para análise posterior.
+
+- [ ] **Portabilidade (Embedded Systems):**
+    - Otimização do código para execução em *Edge Devices* como Raspberry Pi 4 ou NVIDIA Jetson Nano.
