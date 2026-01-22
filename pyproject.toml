@@ -6,7 +6,7 @@
 [project]
 name = "face_mesh"
 version = "0.1.0"
-description = "Descrição inicial do projeto"
+description = "Project dedicated to detecting drowsiness"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
